@@ -17,6 +17,7 @@
   "dependencies": {
     "flatpickr": "^4.6.13",
     "i": "^0.3.7",
+    "izitoast": "^1.4.0",
     "npm": "^10.8.1",
     "simplelightbox": "^2.14.3",
     "vite-plugin-full-reload": "^1.0.5",
