@@ -9,14 +9,15 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const elements = {
   inputDate: document.querySelector('#datetime-picker'),
-  btnStart: document.querySelector('data-start'),
+  btnStart: document.querySelector('[data-start]'),
   dayClock: document.querySelector('data-days'),
   hour: document.querySelector('data-hours'),
   minute: document.querySelector('data-minutes'),
   second: document.querySelector('data-seconds'),
 };
 
-let userSelectedDate;
+let selectedDate;
+elements.btnStart.style.disabled = 'false';
 
 const options = {
   enableTime: true,
@@ -24,9 +25,42 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    // console.log(selectedDates[0]);
+    if (selectedDates[0] > Date.now()) {
+      selectedDate = selectedDates[0];
+      elements.btnStart.style.disabled = 'false';
+    } else {
+      elements.btnStart.style.disabled = 'true';
+      iziToast.error({
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+      });
+    }
   },
 };
+flatpickr(elements.inputDate, options);
+
+elements.btnStart.addEventListener('click', clickStartTimer());
+function clickStartTimer() {
+  elements.btnStart.style.disabled = true;
+  elements.inputDate.style.disabled = true;
+  const intervalId = setInterval(() => {
+    const calculateInterval = selectedDate.getDate() - Date.now();
+    if (interval <= 0) {
+      clearInterval(intervalId);
+      elements.btnStart.style.disabled = false;
+      elements.inputDate.style.disabled = false;
+      return;
+    } else {
+      elements.dayClock.textContent = dayClock;
+      elements.hour.textContent = hour;
+      elements.minute.textContent = minute;
+      elements.second.textContent = second;
+
+      const { days, hours, minutes, seconds } = convertMs(calculateInterval);
+    }
+  }, 1000);
+}
 
 function convertMs(ms) {
   // Number of milliseconds per unit of time
