@@ -10,14 +10,18 @@ import 'izitoast/dist/css/iziToast.min.css';
 const elements = {
   inputDate: document.querySelector('#datetime-picker'),
   btnStart: document.querySelector('[data-start]'),
-  dayClock: document.querySelector('data-days'),
-  hour: document.querySelector('data-hours'),
-  minute: document.querySelector('data-minutes'),
-  second: document.querySelector('data-seconds'),
+  dayClock: document.querySelector('.value[data-days]'),
+  hour: document.querySelector('.value[data-hours]'),
+  minute: document.querySelector('.value[data-minutes]'),
+  second: document.querySelector('.value[data-seconds]'),
 };
 
+elements.btnStart.disabled = true;
+
 let selectedDate;
-elements.btnStart.style.disabled = 'false';
+let interval;
+
+elements.btnStart.addEventListener('click', clickStartTimer);
 
 const options = {
   enableTime: true,
@@ -26,40 +30,50 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     // console.log(selectedDates[0]);
-    if (selectedDates[0] > Date.now()) {
-      selectedDate = selectedDates[0];
-      elements.btnStart.style.disabled = 'false';
-    } else {
-      elements.btnStart.style.disabled = 'true';
+    selectedDate = selectedDates[0];
+
+    if (selectedDate <= new Date()) {
+      elements.btnStart.disabled = true;
       iziToast.error({
         message: 'Please choose a date in the future',
         position: 'topRight',
       });
+    } else {
+      elements.btnStart.disabled = false;
     }
   },
 };
 flatpickr(elements.inputDate, options);
 
-elements.btnStart.addEventListener('click', clickStartTimer());
 function clickStartTimer() {
-  elements.btnStart.style.disabled = true;
-  elements.inputDate.style.disabled = true;
-  const intervalId = setInterval(() => {
-    const calculateInterval = selectedDate.getDate() - Date.now();
-    if (interval <= 0) {
-      clearInterval(intervalId);
-      elements.btnStart.style.disabled = false;
-      elements.inputDate.style.disabled = false;
-      return;
-    } else {
-      elements.dayClock.textContent = dayClock;
-      elements.hour.textContent = hour;
-      elements.minute.textContent = minute;
-      elements.second.textContent = second;
+  interval = setInterval(calculateInterval, 1000);
+  elements.btnStart.disabled = true;
+  elements.inputDate.disabled = true;
+}
 
-      const { days, hours, minutes, seconds } = convertMs(calculateInterval);
-    }
-  }, 1000);
+function stopTimer() {
+  clearInterval(interval);
+
+  elements.btnStart.disabled = false;
+  elements.inputDate.disabled = false;
+
+  elements.dayClock.textContent = '00';
+  elements.hour.textContent = '00';
+  elements.minute.textContent = '00';
+  elements.second.textContent = '00';
+  return;
+}
+
+function calculateInterval() {
+  const calculate = selectedDate - Date.now();
+  const { days, hours, minutes, seconds } = convertMs(calculate);
+  elements.dayClock.textContent = days;
+  elements.hour.textContent = hours;
+  elements.minute.textContent = minutes;
+  elements.second.textContent = seconds;
+  if (calculate <= 0) {
+    stopTimer();
+  }
 }
 
 function convertMs(ms) {
