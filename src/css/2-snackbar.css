@@ -1,0 +1,93 @@
+.form {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input {
+  border: 1px solid #808080;
+  border-radius: 4px;
+
+  width: 360px;
+  margin-top: 8px;
+  height: 40px;
+}
+
+fieldset {
+  width: 360px;
+  height: 66px;
+  margin-top: 30px;
+  padding: 0;
+  border: 1px solid #808080;
+  border-radius: 4px;
+}
+
+.label-radio {
+  display: flex;
+  gap: 48px;
+  padding-left: 48px;
+  padding-top: 14px;
+  padding-bottom: 8px;
+  width: 264px;
+  height: 32px;
+}
+
+legend {
+  margin-left: 28px;
+}
+
+button {
+  display: block;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+  margin-top: 24px;
+  border: none;
+
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+
+  background: #4e75ff;
+}
+
+button:hover,
+button:focus {
+  background-color: #6c8cff;
+}
+
+input:hover {
+  border-radius: 4px;
+  stroke-width: 1px;
+  border-color: #000;
+}
+
+input:pressed {
+  border-color: #4e75ff;
+}
+
+fieldset:hover,
+fieldset:focus {
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #000;
+}
+
+input[type='radio']:hover {
+  border: 1px solid #000;
+  border-radius: 14px;
+}
+
+input[type='radio']:pressed {
+  border: 1px solid #4e75ff;
+  border-radius: 14px;
+}

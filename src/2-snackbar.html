@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/2-snackbar.css" />
     <title>snackbar</title>
   </head>
   <body>
@@ -20,16 +20,27 @@
       <h1>snackbar</h1>
     </section>
 
-    <form class="feedback-form" autocomplete="off">
+    <form class="form">
       <label>
-        Email
-        <input type="email" name="email" autofocus />
+        Delay (ms)
+        <input class="form-input" type="number" name="delay" required />
       </label>
-      <label>
-        Message
-        <textarea name="message" rows="8"></textarea>
-      </label>
-      <button type="submit">Submit</button>
+
+      <fieldset>
+        <legend>State</legend>
+        <div class="label-radio">
+          <label>
+            <input type="radio" name="state" value="fulfilled" required />
+            Fulfilled
+          </label>
+          <label>
+            <input type="radio" name="state" value="rejected" required />
+            Rejected
+          </label>
+        </div>
+      </fieldset>
+
+      <button type="submit">Create notification</button>
     </form>
 
     <script type="module" src="./js/2-snackbar.js"></script>

@@ -67,10 +67,10 @@ function stopTimer() {
 function calculateInterval() {
   const calculate = selectedDate - Date.now();
   const { days, hours, minutes, seconds } = convertMs(calculate);
-  elements.dayClock.textContent = days;
-  elements.hour.textContent = hours;
-  elements.minute.textContent = minutes;
-  elements.second.textContent = seconds;
+  elements.dayClock.textContent = addLeadingZero(days);
+  elements.hour.textContent = addLeadingZero(hours);
+  elements.minute.textContent = addLeadingZero(minutes);
+  elements.second.textContent = addLeadingZero(seconds);
   if (calculate <= 0) {
     stopTimer();
   }
@@ -98,3 +98,7 @@ function convertMs(ms) {
 console.log(convertMs(2000)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
 console.log(convertMs(140000)); // {days: 0, hours: 0, minutes: 2, seconds: 20}
 console.log(convertMs(24140000)); // {days: 0, hours: 6 minutes: 42, seconds: 20}
+
+function addLeadingZero(value) {
+  return value.toString().padStart(2, '0');
+}

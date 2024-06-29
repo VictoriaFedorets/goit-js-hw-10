@@ -12,9 +12,9 @@ input {
   border-radius: 4px;
   width: 272px;
   height: 40px;
-  border: 1px solid #808080;
+  border-radius: 8px;
   margin-right: 8px;
-
+  border-radius: 8px 808080;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -25,15 +25,16 @@ input {
 }
 
 input:hover {
-  border: 1px solid #fff;
+  border: 4px 000000;
 }
 
 input:active {
-  border: 1px solid #fff;
+  border: 4px 4e75FF;
 }
 
 input:disabled {
-  border: 1px solid #fafafa;
+  color: 808080;
+  border-color: 4px FAFAFA;
 }
 
 button {
@@ -50,16 +51,8 @@ button {
 
   background: #4e75ff;
   border: none;
-
   cursor: pointer;
   margin-bottom: 24px;
-
-  /* justify-content: center;
-  align-items: center; */
-
-  /* border: none;
-
-  cursor: pointer; */
 }
 
 button:hover {
